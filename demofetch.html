@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FSD</title>
+    <style>
+        table{
+            margin:auto;
+            width:80%;
+            background-color: aqua;
+            color:red;
+            border :2px solid blue;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Rating</th>
+                <th>Stock</th>
+            </tr>
+        </thead>
+        <tbody id="data"></tbody>
+    </table>
+    <script>
+        const URL = "https://dummyjson.com/products";
+
+        async function loadProducts(URL) {
+            const ele = document.getElementById("data");
+            try {
+                const res = await fetch(URL);
+                const data = await res.json();
+                console.log("data=", data.products);
+                data.products.forEach(product => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${product.title}</td>
+                        <td>${product.category}</td>
+                        <td>${product.price}</td>
+                        <td>${product.rating}</td>
+                        <td>${product.stock}</td>
+                    `;
+                    ele.appendChild(row);
+                });
+            } catch (err) {
+                console.log("error=", err);
+            }
+        }
+
+        loadProducts(URL);
+    </script>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Rating</th>
+                <th>Stock</th>
+                
+            </tr>
+        </thead>
+    </table></tablr>
+</body>
+</html>
